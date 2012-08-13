@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: pelican-9999,v 3.0 2012/08/13 07:33:38$
+# Pelican - last version
 
 EAPI=4
 PYTHON_DEPEND="2"
@@ -43,4 +43,3 @@ src_install() {
 	fi
 }
 
-# for 3.0, should be based on tox (refer to virtualenvwrapper)
