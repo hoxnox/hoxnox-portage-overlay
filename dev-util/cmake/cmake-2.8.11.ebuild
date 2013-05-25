@@ -44,9 +44,6 @@ VIMFILE="${PN}.vim"
 CMAKE_BINARY="${S}/Bootstrap.cmk/cmake"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.6.3-fix_broken_lfs_on_aix.patch
-	"${FILESDIR}"/${PN}-2.6.3-no-duplicates-in-rpath.patch
-	"${FILESDIR}"/${PN}-2.8.0-darwin-default-install_name.patch
 )
 
 cmake_src_bootstrap() {
