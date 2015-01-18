@@ -1,0 +1,40 @@
+--- /tmp/wireshark-1.10.8/epan/dissectors/packet-ssl.c	2014-06-13 01:08:04.000000000 +0400
++++ packet-ssl.c	2014-08-08 10:06:35.309325016 +0400
+@@ -180,6 +180,7 @@
+ static gint hf_ssl_handshake_certificates     = -1;
+ static gint hf_ssl_handshake_certificate      = -1;
+ static gint hf_ssl_handshake_certificate_len  = -1;
++static gint hf_ssl_handshake_certificate_data = -1;
+ static gint hf_ssl_handshake_cert_types_count = -1;
+ static gint hf_ssl_handshake_cert_types       = -1;
+ static gint hf_ssl_handshake_cert_type        = -1;
+@@ -2930,6 +2931,8 @@
+                 proto_tree_add_item(subtree, hf_ssl_handshake_certificate_len,
+                                     tvb, offset, 3, ENC_BIG_ENDIAN);
+                 offset += 3;
++                proto_tree_add_item(subtree, hf_ssl_handshake_certificate_data,
++                                    tvb, offset, cert_length, ENC_NA);
+ 
+                 (void)dissect_x509af_Certificate(FALSE, tvb, offset, &asn1_ctx, subtree, hf_ssl_handshake_certificate);
+                 offset += cert_length;
+@@ -4480,6 +4483,8 @@
+     /* now the variable length fields */
+     if (certificate_length > 0)
+     {
++        proto_tree_add_none_format(tree, hf_ssl_handshake_certificate_data,
++                        tvb, offset, certificate_length, "Certificate Data");
+         (void)dissect_x509af_Certificate(FALSE, tvb, offset, &asn1_ctx, tree, hf_ssl_handshake_certificate);
+         offset += certificate_length;
+     }
+@@ -5274,6 +5279,11 @@
+             FT_UINT24, BASE_DEC, NULL, 0x0,
+             "Length of certificate", HFILL }
+         },
++        { &hf_ssl_handshake_certificate_data,
++          { "Certificate Data", "ssl.handshake.certificate_data",
++            FT_BYTES, BASE_NONE, NULL, 0x0,
++            "Certificate Data", HFILL }
++        },
+         { &hf_ssl_handshake_cert_types_count,
+           { "Certificate types count", "ssl.handshake.cert_types_count",
+             FT_UINT8, BASE_DEC, NULL, 0x0,
