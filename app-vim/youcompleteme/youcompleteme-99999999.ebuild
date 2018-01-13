@@ -130,7 +130,6 @@ src_install() {
 	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*,Vagrantfile} || die
 	find python -name *test* -exec rm -rf {} + || die
 	egit_clean
-	use clang && (rm third_party/ycmd/libclang.so* || die)
 
 	vim-plugin_src_install
 
