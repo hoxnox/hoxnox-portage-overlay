@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{4,5,6} )
 
 inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 
@@ -85,7 +85,7 @@ src_prepare() {
 		rm -r "${S}"/third_party/${third_party_module} || die "Failed to remove third party module ${third_party_module}"
 	done
 	# Argparse is included in python 2.7
-	for third_party_module in argparse bottle python-future requests waitress; do
+	for third_party_module in bottle python-future requests waitress; do
 		rm -r "${S}"/third_party/ycmd/third_party/${third_party_module} || die "Failed to remove third party module ${third_party_module}"
 	done
 	rm -r "${S}"/third_party/ycmd/third_party/JediHTTP/vendor || die "Failed to remove third_party/ycmd/third_party/JediHTTP/vendor"
@@ -98,6 +98,7 @@ src_configure() {
 		-DUSE_SYSTEM_LIBCLANG="$(usex clang)"
 		-DUSE_SYSTEM_BOOST=ON
 		-DUSE_SYSTEM_GMOCK=ON
+		-DUSE_PYTHON2=OFF
 	)
 	cmake-utils_src_configure
 }
@@ -127,7 +128,7 @@ src_test() {
 src_install() {
 	use doc && dodoc *.md third_party/ycmd/*.md
 	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt ci third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/ycmd/tests third_party/ycmd/examples/samples || die
-	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*,Vagrantfile} || die
+	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*} || die
 	find python -name *test* -exec rm -rf {} + || die
 	egit_clean
 
