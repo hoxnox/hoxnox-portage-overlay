@@ -6,15 +6,15 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 python3_{4,5} )
 PYTHON_REQ_USE="sqlite"
 
-inherit distutils-r1 git-r3
+inherit distutils-r1
 
 DESCRIPTION="Distributed C/C++ package manager"
 HOMEPAGE="http://conan.io/"
-EGIT_REPO_URI="https://github.com/conan-io/conan"
-SRC_URI=""
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
+
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="**"
+KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
 IUSE="test"
 
 RDEPEND="
@@ -31,10 +31,8 @@ RDEPEND="
 	>=dev-python/node-semver-0.2.0[${PYTHON_USEDEP}]
 	>=dev-python/pluginbase-0.5[${PYTHON_USEDEP}]
 	>=dev-python/future-0.16[${PYTHON_USEDEP}]
-	>=dev-python/pylint-1.8.1[${PYTHON_USEDEP}]
+	>=dev-python/pylint-1.6.5[${PYTHON_USEDEP}]
 	>=dev-python/astroid-1.5[${PYTHON_USEDEP}]
-	>=dev-python/pygments-2.0[${PYTHON_USEDEP}]
-	>=dev-python/deprecation-2.0[${PYTHON_USEDEP}]
 "
 DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
