@@ -36,6 +36,7 @@ RDEPEND="
 	>=dev-python/pygments-2.0.0[${PYTHON_USEDEP}]
 	>=dev-python/deprecation-2.0[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-conan-4.27.0[${PYTHON_USEDEP}]
+	>=dev-python/packaging-16.8[${PYTHON_USEDEP}]
 "
 DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
