@@ -17,8 +17,11 @@ IUSE=""
 MODULE_NAMES="exfat(kernel/fs:${S})"
 BUILD_TARGETS="all"
 
+
+
 src_prepare(){
 	sed -i -e "/^KREL/d" Makefile || die
+	epatch "${FILESDIR}"/01-timespec.patch
 }
 
 src_compile(){
