@@ -37,6 +37,8 @@ RDEPEND="
 	>=dev-python/deprecation-2.0[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-4.28.1[${PYTHON_USEDEP}]
 	>=dev-python/packaging-16.8[${PYTHON_USEDEP}]
+	>=dev-python/python-dateutil-2.6.1[${PYTHON_USEDEP}]
+	>=dev-python/jinja-2.3[${PYTHON_USEDEP}]
 "
 DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
