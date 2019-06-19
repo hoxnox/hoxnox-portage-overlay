@@ -5,30 +5,15 @@ EAPI=6
 
 PYTHON_COMPAT=( python3_{4,5,6} )
 
-inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
+inherit eutils cmake-utils multilib python-single-r1 vim-plugin
 
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="http://valloric.github.io/YouCompleteMe/"
-EGIT_REPO_URI="git://github.com/Valloric/YouCompleteMe.git"
-EGIT_SUBMODULES=(
-	'*'
-	'-third_party/OmniSharpServer'
-	'-third_party/argparse'
-	'-third_party/bottle'
-	'-third_party/waitress'
-	'-third_party/requests'
-	'-third_party/gocode'
-	'-third_party/godef'
-	'-third_party/python-future'
-	'-vendor/waitress'
-	'-vendor/jedi'
-	'-vendor/bottle'
-	'-vendor/argparse'
-	)
+KEYWORDS="~amd64 ~x86"
+SRC_URI="http://misc.hoxnox.com/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
 IUSE="clang doc test rust"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -69,11 +54,6 @@ CMAKE_IN_SOURCE_BUILD=1
 CMAKE_USE_DIR=${S}/third_party/ycmd/cpp
 
 VIM_PLUGIN_HELPFILES="${PN}"
-
-src_unpack() {
-	use rust || EGIT_SUBMODULES+=('-third_party/racerd')
-	git-r3_src_unpack
-}
 
 src_prepare() {
 	default
@@ -127,10 +107,9 @@ src_test() {
 
 src_install() {
 	use doc && dodoc *.md third_party/ycmd/*.md
-	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt ci third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/ycmd/tests third_party/ycmd/examples/samples || die
+	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/ycmd/tests third_party/ycmd/examples/samples || die
 	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*} || die
 	find python -name *test* -exec rm -rf {} + || die
-	egit_clean
 
 	vim-plugin_src_install
 
