@@ -1,0 +1,21 @@
+#!/sbin/openrc-run
+# Copyright 2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="Proxy server for the Go Modules download API"
+pidfile=${pidfile:-"/run/${SVCNAME}.pid"}
+user=${user:-athens}
+group=${group:-athens}
+
+command="${ATHENS_BINARY:-/usr/bin/athens}"
+command_background="true"
+command_args="${ATHENS_CONFIG:+-config_file \"${ATHENS_CONFIG}\"}"
+
+start_stop_daemon_args="--user ${user} --group ${group} \
+	--stdout /var/log/athens/${SVCNAME}.log \
+	--stderr /var/log/athens/${SVCNAME}.log"
+
+depend() {
+    need net
+    after net
+}
