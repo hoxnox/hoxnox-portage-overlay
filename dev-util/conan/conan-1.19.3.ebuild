@@ -40,6 +40,7 @@ RDEPEND="
 	>=dev-python/typed-ast-1.1.0[${PYTHON_USEDEP}]
 	>=dev-python/pluginbase-0.5[${PYTHON_USEDEP}]
 	>=dev-python/packaging-16.8[${PYTHON_USEDEP}]
+	>=dev-python/bottle-0.12.8[${PYTHON_USEDEP}]
 "
 DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
