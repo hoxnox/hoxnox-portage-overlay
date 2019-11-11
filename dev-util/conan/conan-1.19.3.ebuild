@@ -38,6 +38,8 @@ RDEPEND="
 	>=dev-python/jinja-2.10.1[${PYTHON_USEDEP}]
 	>=dev-python/python-dateutil-2.7.0[${PYTHON_USEDEP}]
 	>=dev-python/typed-ast-1.1.0[${PYTHON_USEDEP}]
+	>=dev-python/pluginbase-0.5[${PYTHON_USEDEP}]
+	>=dev-python/packaging-16.8[${PYTHON_USEDEP}]
 "
 DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
