@@ -20,21 +20,21 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 COMMON_DEPEND="
 	${PYTHON_DEPS}
 	clang? ( >=sys-devel/clang-3.9:= )
-	dev-libs/boost[python,threads,${PYTHON_USEDEP}]
+	dev-libs/boost[python,threads]
 	|| (
-		app-editors/vim[python,${PYTHON_USEDEP}]
-		app-editors/gvim[python,${PYTHON_USEDEP}]
+		app-editors/vim[python]
+		app-editors/gvim[python]
 	)
 "
 RDEPEND="
 	${COMMON_DEPEND}
-	dev-python/bottle[${PYTHON_USEDEP}]
-	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/jedi[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/sh[${PYTHON_USEDEP}]
-	dev-python/waitress[${PYTHON_USEDEP}]
-	virtual/python-futures[${PYTHON_USEDEP}]
+	dev-python/bottle
+	dev-python/future
+	dev-python/jedi
+	dev-python/requests
+	dev-python/sh
+	dev-python/waitress
+	virtual/python-futures
 "
 DEPEND="
 	${COMMON_DEPEND}
@@ -43,8 +43,8 @@ DEPEND="
 		|| ( dev-util/cargo dev-util/cargo-bin )
 	)
 	test? (
-		>=dev-python/mock-1.0.1[${PYTHON_USEDEP}]
-		>=dev-python/nose-1.3.0[${PYTHON_USEDEP}]
+		>=dev-python/mock-1.0.1
+		>=dev-python/nose-1.3.0
 		dev-cpp/gmock
 		dev-cpp/gtest
 	)
