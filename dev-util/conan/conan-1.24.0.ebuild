@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_{5,6,7} )
 PYTHON_REQ_USE="sqlite"
 
 inherit distutils-r1
@@ -62,6 +62,8 @@ src_prepare() {
 	sed -i \
 		-e "s:patch-ng>=1.17.4, <1.18:patch-ng>=1.17.3, <1.18:g" \
 		-e "s:node-semver==0.6.1:node-semver>=0.6.1:g" \
+		-e "s:distro>=1.0.2, <1.2.0:distro>=1.0.2:g" \
+		-e "s:six>=1.10.0,<=1.14.0:six>=1.10.0:g" \
 		conans/requirements.txt
 }
 
