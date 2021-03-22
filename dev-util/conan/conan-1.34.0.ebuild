@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6} )
+PYTHON_COMPAT=( python3_{7,8} )
 PYTHON_REQ_USE="sqlite"
 
 inherit distutils-r1
@@ -22,9 +22,10 @@ IUSE="test"
 RDEPEND="
 	>=dev-python/pyjwt-1.4[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.8.1[${PYTHON_USEDEP}]
+	dev-python/urllib3[${PYTHON_USEDEP}]
 	>=dev-python/colorama-0.3.3[${PYTHON_USEDEP}]
-	>=dev-python/pyyaml-5.1[${PYTHON_USEDEP}]
-	>=dev-python/patch-1.16[${PYTHON_USEDEP}]
+	>=dev-python/pyyaml-3.11[${PYTHON_USEDEP}]
+	>=dev-python/patch-ng-1.17.3[${PYTHON_USEDEP}]
 	>=dev-python/fasteners-0.14.1[${PYTHON_USEDEP}]
 	>=dev-python/six-1.10[${PYTHON_USEDEP}]
 	>=dev-python/node-semver-0.6.1[${PYTHON_USEDEP}]
@@ -35,7 +36,7 @@ RDEPEND="
 	>=dev-python/astroid-1.6.5[${PYTHON_USEDEP}]
 	>=dev-python/deprecation-2.0[${PYTHON_USEDEP}]
 	>=dev-python/tqdm-4.28.1[${PYTHON_USEDEP}]
-	>=dev-python/jinja-2.10.1[${PYTHON_USEDEP}]
+	>=dev-python/jinja-2.3[${PYTHON_USEDEP}]
 	>=dev-python/python-dateutil-2.7.0[${PYTHON_USEDEP}]
 	>=dev-python/typed-ast-1.1.0[${PYTHON_USEDEP}]
 	>=dev-python/pluginbase-0.5[${PYTHON_USEDEP}]
@@ -59,9 +60,10 @@ src_prepare() {
 	default
 	# Fix strict dependencies
 	sed -i \
-		-e "s:patch==1.16:patch>=1.16:g" \
+		-e "s:patch-ng>=1.17.4, <1.18:patch-ng>=1.17.3, <1.18:g" \
 		-e "s:node-semver==0.6.1:node-semver>=0.6.1:g" \
-		-e "s:future==0.16.0:future>=0.16.0:g" \
+		-e "s:distro>=1.0.2, <1.2.0:distro>=1.0.2:g" \
+		-e "s:six>=1.10.0,<=1.14.0:six>=1.10.0:g" \
 		conans/requirements.txt
 }
 

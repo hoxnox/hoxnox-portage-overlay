@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 
 inherit eutils cmake-utils multilib python-single-r1 vim-plugin
 
@@ -36,7 +36,6 @@ RDEPEND="
 	dev-python/waitress
 	dev-python/urllib3
 	dev-python/watchdog
-	virtual/python-futures
 "
 DEPEND="
 	${COMMON_DEPEND}
@@ -68,6 +67,7 @@ src_prepare() {
 	done
 	#rm -r "${S}"/third_party/ycmd/third_party/JediHTTP/vendor || die "Failed to remove third_party/ycmd/third_party/JediHTTP/vendor"
 	rm -r "${S}"/third_party/ycmd/cpp/BoostParts || die "Failed to remove bundled boost"
+	cmake-utils_src_prepare
 }
 
 src_configure() {

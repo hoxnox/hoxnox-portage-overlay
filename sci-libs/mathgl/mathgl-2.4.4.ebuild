@@ -1,9 +1,8 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
 WX_GTK_VER=3.0
 
 inherit cmake-utils eutils python-single-r1 wxwidgets multilib flag-o-matic
