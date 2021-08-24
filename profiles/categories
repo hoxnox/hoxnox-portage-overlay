@@ -1,0 +1,3 @@
+cross-x86_64-w64-mingw32
+cross-aarch64-hardfloat-eabi
+cross-aarch64-none-linux-gnu
