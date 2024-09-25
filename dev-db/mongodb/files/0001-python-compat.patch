@@ -1,0 +1,76 @@
+diff --git a/SConstruct b/SConstruct
+index 1c58ae0e..b8938e6e 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -23,7 +23,7 @@ from pkg_resources import parse_version
+ 
+ import SCons
+ import SCons.Script
+-from mongo_tooling_metrics.lib.top_level_metrics import SConsToolingMetrics
++#from mongo_tooling_metrics.lib.top_level_metrics import SConsToolingMetrics
+ from site_scons.mongo import build_profiles
+ 
+ # This must be first, even before EnsureSConsVersion, if
+@@ -1647,15 +1647,15 @@ env = Environment(variables=env_vars, **envDict)
+ del envDict
+ env.AddMethod(lambda env, name, **kwargs: add_option(name, **kwargs), 'AddOption')
+ 
+-# The placement of this is intentional. Here we setup an atexit method to store tooling metrics.
+-# We should only register this function after env, env_vars and the parser have been properly initialized.
+-SConsToolingMetrics.register_metrics(
+-    utc_starttime=datetime.utcnow(),
+-    artifact_dir=env.Dir('$BUILD_DIR').get_abspath(),
+-    env_vars=env_vars,
+-    env=env,
+-    parser=_parser,
+-)
++## The placement of this is intentional. Here we setup an atexit method to store tooling metrics.
++## We should only register this function after env, env_vars and the parser have been properly initialized.
++#SConsToolingMetrics.register_metrics(
++#    utc_starttime=datetime.utcnow(),
++#    artifact_dir=env.Dir('$BUILD_DIR').get_abspath(),
++#    env_vars=env_vars,
++#    env=env,
++#    parser=_parser,
++#)
+ 
+ if get_option('build-metrics'):
+     env['BUILD_METRICS_ARTIFACTS_DIR'] = '$BUILD_ROOT/$VARIANT_DIR'
+@@ -4646,8 +4646,8 @@ def doConfigure(myenv):
+             else:
+                 # According to intel benchmarks -fno-plt increases perf
+                 # See PM-2215
+-                if linker_ld != "gold":
+-                    myenv.ConfError("lto compilation currently only works with the --linker=gold")
++                #if linker_ld != "gold":
++                #    myenv.ConfError("lto compilation currently only works with the --linker=gold")
+                 if link_model != "object":
+                     myenv.ConfError(
+                         "lto compilation currently only works with the --link-model=object")
+diff --git a/buildscripts/scons.py b/buildscripts/scons.py
+index f7f7fcd3..e5d45aad 100755
+--- a/buildscripts/scons.py
++++ b/buildscripts/scons.py
+@@ -18,14 +18,14 @@ SITE_TOOLS_DIR = os.path.join(MONGODB_ROOT, 'site_scons')
+ 
+ sys.path = [SCONS_DIR, SITE_TOOLS_DIR] + sys.path
+ 
+-# pylint: disable=C0413
+-from mongo.pip_requirements import verify_requirements, MissingRequirements
+-
+-try:
+-    verify_requirements('etc/pip/compile-requirements.txt')
+-except MissingRequirements as ex:
+-    print(ex)
+-    sys.exit(1)
++## pylint: disable=C0413
++#from mongo.pip_requirements import verify_requirements, MissingRequirements
++#
++#try:
++#    verify_requirements('etc/pip/compile-requirements.txt')
++#except MissingRequirements as ex:
++#    print(ex)
++#    sys.exit(1)
+ 
+ try:
+     import SCons.Script
